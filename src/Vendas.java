@@ -4,19 +4,19 @@ public class Vendas {
     private String qtd;
     private double valor;
     private String item;
-    private LocalDate hora;
+    private LocalDate data;
     private String pagamento;
 
-    public Vendas(String qtd, double valor, String item, LocalDate hora, String pagamento){
+    public Vendas(String qtd, double valor, String item, LocalDate data, String pagamento){
         setQtd(qtd);
         setValor(valor);
         setItem(item);
-        setHora(hora);
+        setData(data);
         setPagamento(pagamento);
     }
     public void listar(){
         System.out.println("------------");
-        System.out.println("Momento da compra: " + this.getHora());
+        System.out.println("Momento da compra: " + this.getData());
         System.out.println("Itens: " + this.getItem());
         System.out.println("Quantidade: " + this.getQtd());
         System.out.println("Total: " + this.getValor());
@@ -42,11 +42,11 @@ public class Vendas {
     public String getItem(){
         return item;
     }
-    public void setHora(LocalDate hora){
-        this.hora = hora;
+    public void setData(LocalDate data){
+        this.data = data;
     }
-    public LocalDate getHora(){
-        return hora;
+    public LocalDate getData(){
+        return data;
     }
     public void setPagamento(String pagamento){
         this.pagamento = pagamento;

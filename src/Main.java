@@ -231,7 +231,7 @@ public class Main {
                     LocalDate dt1 = LocalDate.parse(data1);
                     LocalDate dt2 = LocalDate.parse(data2);
                     for (Vendas venda : vendas) {
-                        if (venda.getHora().isBefore(dt2) || venda.getHora().isEqual(dt2) && venda.getHora().isAfter(dt1) || venda.getHora().isEqual(dt1)) {
+                        if (venda.getData().isBefore(dt2) || venda.getData().isEqual(dt2) && venda.getData().isAfter(dt1) || venda.getData().isEqual(dt1)) {
                             if (itens.equals("")) {
                                 itens = venda.getItem();
                             } else {
