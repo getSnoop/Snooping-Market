@@ -222,14 +222,14 @@ public class Main {
                     int dinheiro = 0;
                     int outro = 0;
                     String itensV = "";
-                    System.out.println("Escolha o dia anterior a primeira data para o relatório (aaaa-mm-dd)");
+                    System.out.println("Escolha a primeira data para o relatório (aaaa-mm-dd)");
                     String data1 = scanner.nextLine();
-                    System.out.println("Escolha o dia após a segunda data para o relatório (aaaa-mm-dd)");
+                    System.out.println("Escolha a segunda data para o relatório (aaaa-mm-dd)");
                     String data2 = scanner.nextLine();
                     LocalDate dt1 = LocalDate.parse(data1);
                     LocalDate dt2 = LocalDate.parse(data2);
                     for (Vendas venda : vendas) {
-                        if (venda.getHora().isBefore(dt2) && venda.getHora().isAfter(dt1)) {
+                        if (venda.getHora().isBefore(dt2) || venda.getHora().isEqual(dt2) && venda.getHora().isAfter(dt1) || venda.getHora().isEqual(dt1)) {
                             if (itens.equals("")) {
                                 itens = venda.getItem();
                             } else {
