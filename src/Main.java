@@ -21,7 +21,7 @@ public class Main {
             if (escolha == 1) {
                 System.out.println(" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" + "[Escolha o número para realizar sua ação!]");
                 System.out.println("|   [1] Cadastrar Produtos    [2] Retirar Cadastro    [3] Listar Produtos");
-                System.out.println("|   [4] Pesquisar Produtos    ");
+                System.out.println("|   [4] Pesquisar Produtos    [5] Retornar ao menu principal");
                 System.out.println("V =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                 escolha = scanner.nextInt();
                 scanner.nextLine();
@@ -88,11 +88,13 @@ public class Main {
                             pesquisar = false;
                         }
                     }
+                } else if (escolha == 5){
+                    System.out.println("...");
                 }
             } else if (escolha == 2) {
                 System.out.println(" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" + "[Escolha o número para realizar sua ação!]");
                 System.out.println("|   [1] Comprar               [2] Listar Vendas       [3] Pesquisar Vendas");
-                System.out.println("|   [4] Relatório de Vendas");
+                System.out.println("|   [4] Relatório de Vendas   [5] Retornar ao menu principal");
                 System.out.println("V =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                 escolha = scanner.nextInt();
                 scanner.nextLine();
@@ -256,6 +258,8 @@ public class Main {
                     System.out.println("*Formas de pagamento usadas:");
                     System.out.println("Dinheiro: " + dinheiro + "   Cartão:" + cartao + "   Outros:" + outro);
                     System.out.println("Dinheiro gerado: " + dinheiroGanho);
+                }  else if (escolha == 5){
+                    System.out.println("...");
                 }
             }
                     System.out.println("-----------------------------------------------");
