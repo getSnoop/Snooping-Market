@@ -63,9 +63,9 @@ public class Main {
                     String resposta;
                     while (pesquisar) {
                         System.out.println("-----Pesquise seu produto-----");
-                        System.out.println("(escolha [N] para nome e [C] para categoria)");
+                        System.out.println("(escolha [1] para nome e [2] para categoria)");
                         tipo = scanner.nextLine();
-                        if (tipo.equalsIgnoreCase("N")) {
+                        if (tipo.contains("1")) {
                             System.out.println("*Escreva o nome do produto:");
                             tipo = scanner.nextLine();
                             for (Produtos produto : produtos) {
@@ -73,7 +73,7 @@ public class Main {
                                     produto.listar();
                                 }
                             }
-                        } else if (tipo.equalsIgnoreCase("C")) {
+                        } else if (tipo.contains("2")) {
                             System.out.println("*Escreva a categoria do produto:");
                             tipo = scanner.nextLine();
                             for (Produtos produto : produtos) {
