@@ -17,7 +17,6 @@ public class Main {
             System.out.println("|   [1] Produtos                   [2] Vendas");
             System.out.println("V =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             escolha = scanner.nextInt();
-            scanner.nextLine();
             if (escolha == 1) {
                 System.out.println(" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" + "[Escolha o número para realizar sua ação!]");
                 System.out.println("|   [1] Cadastrar Produtos    [2] Retirar Cadastro    [3] Listar Produtos");
@@ -29,10 +28,10 @@ public class Main {
                     System.out.println("Primeiro, insira o nome");
                     String n = scanner.nextLine();
                     System.out.println("Escolha o código de seu item");
-                    int c = scanner.nextInt();
-                    scanner.nextLine();
+                    String c = scanner.next();
                     System.out.println("Agora insira o valor do produto");
-                    double v = scanner.nextDouble();
+                    String valor = scanner.next().replaceAll(",", ".");
+                    double v = Double.parseDouble(valor);
                     System.out.println("Qual a categoria de seu produto?");
                     String ca = scanner.next();
                     System.out.println("Por fim, insira a quantidade do seu produto no estoque");
@@ -58,6 +57,8 @@ public class Main {
                     }
                 } else if (escolha == 4) {
                     boolean pesquisar;
+                    boolean encontrou;
+                    encontrou = false;
                     pesquisar = true;
                     String tipo;
                     String resposta;
@@ -71,7 +72,11 @@ public class Main {
                             for (Produtos produto : produtos) {
                                 if (produto.getNome().contains(tipo)) {
                                     produto.listar();
+                                    encontrou = true;
                                 }
+                            }
+                            if (!encontrou){
+                                System.out.println("Nenhum produto encontrado!");
                             }
                         } else if (tipo.contains("2")) {
                             System.out.println("*Escreva a categoria do produto:");
@@ -79,7 +84,11 @@ public class Main {
                             for (Produtos produto : produtos) {
                                 if (produto.getCategoria().contains(tipo)) {
                                     produto.listar();
+                                    encontrou = true;
                                 }
+                            }
+                            if (!encontrou){
+                                System.out.println("Nenhum produto encontrado!");
                             }
                         }
                         System.out.println("=-=-=-=-=-=-=-=-=-= \n" + "Deseja  [1] pesquisar outro produto ou [2]Não pesquisar");
@@ -199,6 +208,8 @@ public class Main {
                     }
                 } else if (escolha == 3) {
                     boolean pesquisar;
+                    boolean encontrou;
+                    encontrou = false;
                     pesquisar = true;
                     String tipo;
                     String resposta;
@@ -209,7 +220,11 @@ public class Main {
                         for (Vendas venda : vendas) {
                             if (venda.getItem().contains(tipo)) {
                                 venda.listar();
+                                encontrou = true;
                             }
+                        }
+                        if (!encontrou){
+                            System.out.println("Nenhum produto encontrado!");
                         }
                         System.out.println("Deseja [1] pesquisar outro produto ou [2] Não pesquisar");
                         resposta = scanner.nextLine();

@@ -2,10 +2,10 @@ public class Produtos {
     private String nome;
     private double valor;
     private int unidades;
-    private int codigo;
+    private String codigo;
     private String categoria;
 
-    public Produtos(String n, double v, int u, int c, String ca){
+    public Produtos(String n, double v, int u, String c, String ca){
         this.setNome(n);
         this.setValor(v);
         this.setUnidades(u);
@@ -40,10 +40,10 @@ public class Produtos {
     public int getUnidades(){
         return unidades;
     }
-    public void setCodigo(int codigo){
+    public void setCodigo(String codigo){
         this.codigo = codigo;
     }
-    public int getCodigo(){
+    public String getCodigo(){
         return codigo;
     }
     public void setCategoria(String categoria){
