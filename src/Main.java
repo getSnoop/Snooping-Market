@@ -8,11 +8,11 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         List<Produtos> produtos = new ArrayList<>();
         List<Vendas> vendas = new ArrayList<>();
-        boolean repetirgeral = true;
+        boolean repetirGeral = true;
         Scanner scanner = new Scanner(System.in);
         int escolha;
 
-        while (repetirgeral) {
+        while (repetirGeral) {
             System.out.println(" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" + "|   [Escolha o número para abrir seu menu!]");
             System.out.println("|   [1] Produtos                   [2] Vendas");
             System.out.println("V =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -24,7 +24,7 @@ public class Main {
                 System.out.println("V =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                 escolha = scanner.nextInt();
                 scanner.nextLine();
-                if (escolha == 1) {
+                    if (escolha == 1) {
                     System.out.println("Primeiro, insira o nome");
                     String n = scanner.nextLine();
                     System.out.println("Escolha o código de seu item");
@@ -39,7 +39,7 @@ public class Main {
                     scanner.nextLine();
                     Produtos produto = new Produtos(n, v, u, c, ca);
                     produtos.add(produto);
-                    System.out.println("Seu produto foi registrado! \n" + "Nome: " + produto.getNome() + "\n Valor: " + produto.getValor() + "\n Unidades em estoque: " + produto.getUnidades());
+                    System.out.println("Seu produto foi registrado! \n" + "Nome: " + produto.getNome() + "\nValor: " + produto.getValor() + "\nUnidades em estoque: " + produto.getUnidades());
                 } else if (escolha == 2) {
                     System.out.println("Qual produto você quer retirar o cadastro? ");
                     String retirar = scanner.nextLine();
@@ -56,10 +56,8 @@ public class Main {
                         produto.listar();
                     }
                 } else if (escolha == 4) {
-                    boolean pesquisar;
-                    boolean encontrou;
-                    encontrou = false;
-                    pesquisar = true;
+                    boolean pesquisar = true;
+                    boolean encontrou = false;
                     String tipo;
                     String resposta;
                     while (pesquisar) {
@@ -70,7 +68,7 @@ public class Main {
                             System.out.println("*Escreva o nome do produto:");
                             tipo = scanner.nextLine();
                             for (Produtos produto : produtos) {
-                                if (produto.getNome().contains(tipo)) {
+                                if (produto.getNome().equalsIgnoreCase(tipo)) {
                                     produto.listar();
                                     encontrou = true;
                                 }
@@ -82,7 +80,7 @@ public class Main {
                             System.out.println("*Escreva a categoria do produto:");
                             tipo = scanner.nextLine();
                             for (Produtos produto : produtos) {
-                                if (produto.getCategoria().contains(tipo)) {
+                                if (produto.getCategoria().equalsIgnoreCase(tipo)) {
                                     produto.listar();
                                     encontrou = true;
                                 }
@@ -113,11 +111,13 @@ public class Main {
                     int qtd;
                     String qtd2 = "";
                     String itens = "";
+                    boolean encontrou = false;
                     while (adicionar) {
                         System.out.println("Qual produto você deseja adicionar ao carrinho?");
                         String comprar = scanner.nextLine();
                         for (Produtos produto : produtos) {
                             if (comprar.equalsIgnoreCase(produto.getNome())) {
+                                encontrou = true;
                                 System.out.println("Qual quantidade você deseja?");
                                 qtd = scanner.nextInt();
                                 scanner.nextLine();
@@ -201,10 +201,25 @@ public class Main {
                                 }
                             }
                         }
+                        if (encontrou == false) {
+                            int confirma;
+                            System.out.println("Nenhum produto encontrado com esse nome!");
+                            System.out.println("Deseja [1] procurar por outro ou [2] fechar o menu de compra?");
+                            confirma = scanner.nextInt();
+                            scanner.nextLine();
+                            if (confirma == 2){
+                                adicionar = false;
+                            }
+                        }
                     }
                 } else if (escolha == 2) {
+                    boolean encontrou = false;
                     for (Vendas venda : vendas) {
                         venda.listar();
+                        encontrou = true;
+                    }
+                    if (encontrou == false){
+                        System.out.println("Nenhuma venda foi feita!");
                     }
                 } else if (escolha == 3) {
                     boolean pesquisar;
@@ -218,7 +233,7 @@ public class Main {
                         System.out.println("*Escreva o nome do produto:");
                         tipo = scanner.nextLine();
                         for (Vendas venda : vendas) {
-                            if (venda.getItem().contains(tipo)) {
+                            if (venda.getItem().equalsIgnoreCase(tipo)) {
                                 venda.listar();
                                 encontrou = true;
                             }
@@ -239,6 +254,7 @@ public class Main {
                     int dinheiro = 0;
                     int outro = 0;
                     String itensV = "";
+                    boolean encontrou = false;
                     System.out.println("Escolha a primeira data para o relatório (aaaa-mm-dd)");
                     String data1 = scanner.nextLine();
                     System.out.println("Escolha a segunda data para o relatório (aaaa-mm-dd)");
@@ -247,6 +263,7 @@ public class Main {
                     LocalDate dt2 = LocalDate.parse(data2);
                     for (Vendas venda : vendas) {
                         if (venda.getData().isBefore(dt2) || venda.getData().isEqual(dt2) && venda.getData().isAfter(dt1) || venda.getData().isEqual(dt1)) {
+                            encontrou = true;
                             if (itens.equals("")) {
                                 itens = venda.getItem();
                             } else {
@@ -267,12 +284,16 @@ public class Main {
                             }
                         }
                     }
-                    System.out.println("Relatório finalizado!");
-                    System.out.println("=-=Itens comprados: " + itens + "=-=");
-                    System.out.println("=-=Quantidade de itens vendidos: " + itensV + "=-=");
-                    System.out.println("*Formas de pagamento usadas:");
-                    System.out.println("Dinheiro: " + dinheiro + "   Cartão:" + cartao + "   Outros:" + outro);
-                    System.out.println("Dinheiro gerado: " + dinheiroGanho);
+                    if (encontrou) {
+                        System.out.println("Relatório finalizado!");
+                        System.out.println("=-=Itens vendidos: " + itens + "=-=");
+                        System.out.println("=-=Quantidade de itens vendidos: " + itensV + "=-=");
+                        System.out.println("*Formas de pagamento usadas:");
+                        System.out.println("Dinheiro: " + dinheiro + "   Cartão:" + cartao + "   Outros:" + outro);
+                        System.out.println("Dinheiro gerado: " + dinheiroGanho);
+                    } else if (!encontrou){
+                        System.out.println("Nenhuma venda encontrada entra essas datas!");
+                    }
                 }  else if (escolha == 5){
                     System.out.println("...");
                 }
